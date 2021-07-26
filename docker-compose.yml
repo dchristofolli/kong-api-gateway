@@ -13,7 +13,7 @@ networks:
   kong-net:
     external: false
 services:
-  xray-server:
+  xray:
     build:
       dockerfile: /home/daniel/Development/JavaProjects/xray-server/Dockerfile
       context: /home/daniel/Development/JavaProjects/xray-server
@@ -124,7 +124,7 @@ services:
         max_attempts: 5
       resources:
         limits:
-          cpus: 2
+          cpus: "2"
           memory: 2g
     security_opt:
       - no-new-privileges
@@ -135,7 +135,7 @@ services:
       POSTGRES_USER: kong
       POSTGRES_PASSWORD: kong
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${KONG_PG_USER:-kong}"]
+      test: ["CMD", "pg_isready", "-U", "kong"]
       interval: 30s
       timeout: 30s
       retries: 3
